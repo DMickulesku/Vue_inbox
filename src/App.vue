@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <toolbar></toolbar>
-    <compose v-if='seen'></compose>
     <messages></messages>
+    <br>
+    <compose v-if='seen'></compose>
   </div>
 </template>
 

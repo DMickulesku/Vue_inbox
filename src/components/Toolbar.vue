@@ -1,10 +1,6 @@
 <template>
   <div class="row toolbar">
   <div class="col-md-12">
-    <p class="pull-right">
-      <span name="badge badge">2</span>
-      unread messages
-    </p>
 
     <b-button class="btn btn-default">
       <icon name="check-square-o"></icon>
@@ -35,6 +31,11 @@
     <b-button class="btn btn-default">
       <icon name="trash-o"></icon>
     </b-button>
+
+    <p class="pull-right">
+      <b-badge class="badge" pill variant="" name="badge badge">2</b-badge>
+      unread messages
+    </p>
   </div>
 </div>
 </template>
