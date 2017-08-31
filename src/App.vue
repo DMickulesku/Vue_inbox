@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <toolbar></toolbar>
-    <messages></messages>
+    <messages :emailStarred="emailStarred" :staro='staro' :star='star'></messages>
     <br>
-    <compose v-if='seen'></compose>
+    <compose v-show='seen'></compose>
   </div>
 </template>
 
@@ -12,6 +12,7 @@ import Toolbar from './components/Toolbar'
 import Message from './components/Message'
 import Messages from './components/Messages'
 import Compose from './components/Compose'
+import data from './data/seeds'
 
 export default {
   name: 'app',
@@ -20,6 +21,29 @@ export default {
     Message,
     Messages,
     Compose
+  },
+  data() {
+    return{
+      email: data,
+      star: 'star',
+      staro: 'star-o',
+      seen: false
+    }
+  },
+  methods: {
+    emailStarred() {
+      let data = this.$data
+      if (data.staro === 'star-o') {
+        data.staro = 'star'
+      }
+      else if (data.star === 'star') {
+        data.star = 'star-o'
+      }
+      else {
+        data.staro = 'star-o'
+        data.star = 'star'
+      }
+    }
   }
 }
 </script>
