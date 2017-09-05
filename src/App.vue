@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <toolbar></toolbar>
-    <messages :emailStarred="emailStarred" :staro='staro' :star='star'></messages>
+    <messages></messages>
     <br>
     <compose v-show='seen'></compose>
   </div>
@@ -12,7 +12,9 @@ import Toolbar from './components/Toolbar'
 import Message from './components/Message'
 import Messages from './components/Messages'
 import Compose from './components/Compose'
-import data from './data/seeds'
+// import data from './data/seeds'
+
+const baseURL= 'http://localhost:8082/api'
 
 export default {
   name: 'app',
@@ -23,29 +25,26 @@ export default {
     Compose
   },
   data() {
-    return{
-      email: data,
-      star: 'star',
-      staro: 'star-o',
-      seen: false
+    return {
+      seen: false,
+      emails: []
     }
   },
   methods: {
-    emailStarred() {
-      let data = this.$data
-      if (data.staro === 'star-o') {
-        data.staro = 'star'
-      }
-      else if (data.star === 'star') {
-        data.star = 'star-o'
-      }
-      else {
-        data.staro = 'star-o'
-        data.star = 'star'
-      }
+    starred() {
+      return true;
     }
+  },
+  async mounted() {
+    const data = await fetch(`${baseURL}/messages`)
+    const response = await data.json()
+    this.emails = response._embedded.messages.map(messages => {
+      message.selected = false
+      return message
+    })
   }
 }
+
 </script>
 
 <style>

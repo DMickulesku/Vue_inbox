@@ -1,6 +1,6 @@
 <template>
   <div class="messages">
-    <Message v-for='email in emailList' :email='email' key='' :emailStarred='emailStarred' :staro='staro' :star='star'></Message>
+    <Message v-for='email in emailList' :email='email' key='email.id'></Message>
   </div>
 </template>
 
@@ -10,7 +10,6 @@ import Data from '../data/seeds'
 
 export default {
   name: 'messages',
-  props: [ 'email','emailStarred', 'staro', 'star'],
   components: {
     Message
   },
