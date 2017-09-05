@@ -2,8 +2,10 @@
   <div class="row toolbar">
   <div class="col-md-12">
 
-    <b-button class="btn btn-default">
-      <icon name="check-square-o"></icon>
+    <b-button class="btn btn-default" @click="bulkSelect">
+      <icon v-if="halfCheckbox" name="minus-square-o"></icon>
+      <icon v-if="bulkCheckbox" name="check-square-o"></icon>
+      <icon v-if="emptyCheckbox" name="square-o"></icon>
     </b-button>
 
     <b-button class="btn btn-default">
@@ -42,7 +44,14 @@
 
 <script>
 export default {
-  name: 'toolbar'
+  name: 'toolbar',
+  props: [
+    'emails',
+    'bulkCheckbox',
+    'halfCheckbox',
+    'emptyCheckbox',
+    'bulkSelect'
+  ]
 }
 </script>
 

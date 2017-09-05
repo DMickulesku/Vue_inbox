@@ -4,7 +4,7 @@
   <div class="col-xs-1">
     <div class="row">
       <div class="col-xs-2">
-        <input @click="emailChecked" class="checkbox" type="checkbox" v-model="checked"/>
+        <input class="checkbox" type="checkbox" v-model="email.selected"/>
       </div>
       <div class="col-xs-2" @click="emailStarred()">
         <icon v-if="!email.starred" class="star" name="star-o"></icon>
@@ -48,5 +48,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-  
+
 </style>

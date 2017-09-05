@@ -1,9 +1,25 @@
 <template>
   <div id="app">
-    <toolbar></toolbar>
-    <messages></messages>
+    <toolbar
+      :emails='emails'
+      :bulkCheckbox='bulkCheckbox'
+      :halfCheckbox='halfCheckbox'
+      :emptyCheckbox='emptyCheckbox'
+      :unreadCount='unreadCount'
+      :bulkSelect='bulkSelect'>
+    </toolbar>
+
+    <messages
+      :emails='emails'
+      :starred='starred'>
+    </messages>
+
     <br>
-    <compose v-show='seen'></compose>
+    <!-- <compose
+      :inputForm='inputForm'
+      :exitForm='exitForm'
+      :form='form'>
+    </compose> -->
   </div>
 </template>
 
@@ -26,19 +42,46 @@ export default {
   },
   data() {
     return {
-      seen: false,
+      form: false,
       emails: []
     }
   },
   methods: {
     starred() {
       return true;
+    },
+    bulkSelect() {
+      if (this.bulkCheckbox) {
+        this.emails.forEach(email => this.$set(email, 'selected', false))
+      } else {
+        this.emails.forEach(email => this.$set(email, 'selected', true))
+      }
+    }
+
+  },
+  computed: {
+    unreadCount() {
+      return this.emails.reduce((acc, email) => {
+        if (email.read == false) {
+          acc++
+        }
+        return acc
+      }, 0)
+    },
+    bulkCheckbox() {
+      return this.emails.every(email => email.selected)
+    },
+    halfCheckbox() {
+      return this.emails.some(email => email.selected) && !this.bulkCheckbox
+    },
+    emptyCheckbox() {
+      return this.emails.every(email => !email.selected)
     }
   },
   async mounted() {
     const data = await fetch(`${baseURL}/messages`)
     const response = await data.json()
-    this.emails = response._embedded.messages.map(messages => {
+    this.emails = response._embedded.messages.map(message => {
       message.selected = false
       return message
     })
