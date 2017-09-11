@@ -8,11 +8,11 @@
       <icon v-if="emptyCheckbox" name="square-o"></icon>
     </b-button>
 
-    <b-button class="btn btn-default">
+    <b-button class="btn btn-default" >
       Mark As Read
     </b-button>
 
-    <b-button class="btn btn-default">
+    <b-button class="btn btn-default" >
       Mark As Unread
     </b-button>
 
@@ -30,7 +30,7 @@
       <option value="gschool">gschool</option>
     </select>
 
-    <b-button class="btn btn-default">
+    <b-button class="btn btn-default" @click="removeMessage ">
       <icon name="trash-o"></icon>
     </b-button>
 
@@ -50,7 +50,8 @@ export default {
     'bulkCheckbox',
     'halfCheckbox',
     'emptyCheckbox',
-    'bulkSelect'
+    'bulkSelect',
+    'removeMessage'
   ]
 }
 </script>

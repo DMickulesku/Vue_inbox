@@ -6,7 +6,9 @@
       :halfCheckbox='halfCheckbox'
       :emptyCheckbox='emptyCheckbox'
       :unreadCount='unreadCount'
-      :bulkSelect='bulkSelect'>
+      :bulkSelect='bulkSelect'
+      :removeMessage='removeMessage'>
+
     </toolbar>
 
     <messages
@@ -56,6 +58,11 @@ export default {
       } else {
         this.emails.forEach(email => this.$set(email, 'selected', true))
       }
+    },
+    removeMessage() {
+      this.emails = this.emails.filter(email => {
+        return !email.selected
+      })
     }
 
   },
@@ -77,6 +84,7 @@ export default {
     emptyCheckbox() {
       return this.emails.every(email => !email.selected)
     }
+
   },
   async mounted() {
     const data = await fetch(`${baseURL}/messages`)
